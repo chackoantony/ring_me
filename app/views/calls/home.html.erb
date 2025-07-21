@@ -1,0 +1,20 @@
+<div class="container">
+  <h1>Ring-Me-Back</h1>
+  <% if flash[:alert] %>
+    <div class="flash alert">
+      <%= flash[:alert] %>
+    </div>
+  <% end %>
+
+  <%= form_with model: @call, url: calls_path, method: :post do |f| %>
+    <p>
+      <%= f.label :to_number, "Phone Number" %><br>
+      <%= f.telephone_field :to_number, placeholder: "+15551234567", required: true %>
+    </p>
+    <p>
+      <%= f.label :body, "Message to speak" %><br>
+      <%= f.text_area :body, value: @call.body.presence || "Hello from my Rails app!", rows: 4 %>
+    </p>
+    <%= f.submit "Call now" %>
+  <% end %>
+</div>
